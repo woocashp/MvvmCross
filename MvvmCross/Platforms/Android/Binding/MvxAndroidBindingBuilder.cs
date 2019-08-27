@@ -5,7 +5,6 @@
 using Android.Graphics;
 using Android.Preferences;
 using Android.Views;
-using Android.Webkit;
 using Android.Widget;
 using MvvmCross.Base;
 using MvvmCross.IoC;
@@ -180,9 +179,9 @@ namespace MvvmCross.Platforms.Android.Binding
                 MvxAndroidPropertyBinding.MvxRadioGroup_SelectedItem,
                 radioGroup => new MvxRadioGroupSelectedItemBinding(radioGroup));
 
-            registry.RegisterCustomBindingFactory<EditText>(
+            registry.RegisterCustomBindingFactory(
                 MvxAndroidPropertyBinding.EditText_TextFocus,
-                editText => new MvxTextViewFocusTargetBinding(editText));
+                (EditText view) => new MvxTextViewFocusTargetBinding(view));
 
             registry.RegisterCustomBindingFactory<SearchView>(
                 MvxAndroidPropertyBinding.SearchView_Query,
@@ -220,22 +219,6 @@ namespace MvvmCross.Platforms.Android.Binding
                 registry.RegisterCustomBindingFactory<View>(
                     margin, view => new MvxViewMarginTargetBinding(view, margin));
             }
-            
-            registry.RegisterCustomBindingFactory<View>(
-                MvxAndroidPropertyBinding.View_Focus,
-                view => new MvxViewFocusChangedTargetbinding(view));
-            
-            registry.RegisterCustomBindingFactory<VideoView>(
-                MvxAndroidPropertyBinding.VideoView_Uri,
-                view => new MvxVideoViewUriTargetBinding(view));
-            
-            registry.RegisterCustomBindingFactory<WebView>(
-                MvxAndroidPropertyBinding.WebView_Uri,
-                view => new MvxWebViewUriTargetBinding(view));
-            
-            registry.RegisterCustomBindingFactory<WebView>(
-                MvxAndroidPropertyBinding.WebView_Html,
-                view => new MvxWebViewHtmlTargetBinding(view));
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
@@ -256,8 +239,6 @@ namespace MvvmCross.Platforms.Android.Binding
             registry.AddOrOverwrite(typeof(SearchView), MvxAndroidPropertyBinding.SearchView_Query);
             registry.AddOrOverwrite(typeof(NumberPicker), MvxAndroidPropertyBinding.NumberPicker_Value);
             registry.AddOrOverwrite(typeof(NumberPicker), MvxAndroidPropertyBinding.NumberPicker_DisplayedValues);
-            registry.AddOrOverwrite(typeof(VideoView), MvxAndroidPropertyBinding.VideoView_Uri);
-            registry.AddOrOverwrite(typeof(WebView), MvxAndroidPropertyBinding.WebView_Uri);
         }
 
         protected override void RegisterPlatformSpecificComponents()
