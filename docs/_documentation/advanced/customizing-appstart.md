@@ -57,7 +57,7 @@ public class AppStart : MvxAppStart
 {
 	private readonly IAuthenticationService _authenticationService;
 
-	public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService, IAuthenticationService authenticationService) : base(application, navigationService)
+	public AppStart(IMvxApplication application, IMvxNavigationService navigationService, IAuthenticationService authenticationService) : base(application, navigationService)
 	{
 		_authenticationService = authenticationService;
 	}
